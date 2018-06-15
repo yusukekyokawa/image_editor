@@ -1,4 +1,6 @@
 import  cv2
+from image_prepro import binary_threshold, resize_image
+
 
 #画像の輪郭検出
 def detect_contour(path, min_size):
@@ -6,11 +8,11 @@ def detect_contour(path, min_size):
     forcrop = cv2.imread(path)
 
     # make binary image　　画像の2値か
-    birds = binary_threshold_for_birds(path)
-    birds = cv2.bitwise_not(birds)
+    katagami = binary_threshold(path)
+    katagami = cv2.bitwise_not(katagami)
 
     # detect contour
-    im2, contours, hierarchy = cv2.findContours(birds, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    im2, contours, hierarchy = cv2.findContours(katagami, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     crops = []
     # draw contour
